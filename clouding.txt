@@ -1,0 +1,726 @@
+az
+create storage 클릭
+
+
+
+
+
+11월14일
+
+az network vnet subnet + 명령어
+                 타    겟
+
+az group create --help
+
+ls ~/.ssh/
+
+ssh-keygen -t rsa -b 2048
+
+cat ~/.ssh/1114_rsa.pub
+
+가상 머신
+az vm create -g TestRG -n vm01
+
+az vm create -g TestRG -n vm01 --nics nic01 --size Standard_DS1_v2 image UbuntuLTS --admin-user squalarm --ssh-key-value ~/.ssh/1114.rsa.pub
+
+ssh -i -/.ssh/1114_rsa squalarm@168.62.166.80
+
+
+
+
+az group create -l eastus 
+
+az group show -n TestRG --query location
+az vm list-skus -l eastus -o tsv                                         skus(크기)
+
+az vm list-skus -l eastus
+
+az network vnet
+
+
+
+
+
+
+az network nsg rule create -g TestRG -n ruleSSH(리눅스 보안SSH) --protocol tcp --priority 1000 --destination-port-range 22 -- access allow --nsg-name nsg01
+                                                   ruleHTTP                                                    1100
+
+
+az network nic create -g TestRG -n nic01 --vnet-name vnet01 --subnet subnet01 --network-security-group nsg01 --public-ip-address pIP01                                           
+
+
+폴트 독립 (고가용성)
+업데이트 독립
+얼빌리빌리티 셋 - 가상넷 자동분배
+어빌리빌리티 존 - 수동으로 딸로 세팅
+
+ssh-keygen -t rsa -b 2048                  -t(byte)   -b(byte)
+/users/codingstar/.ssh/1114_rsa
+
+az vm create -g TestRG -n vm01 --nics nic01 --size Standard_DS1_V2 --image UbuntuLTS -- admin-user mingyu --ssh-key-value ~/.ssh/1114_rsa.pub
+
+ssh -i ~/.ssh_rsa minyu@168.62.166.80
+
+sudo apt udate
+sudo apt upgrade
+sudo apt install -y nginx
+
+exit
+logout
+az group delete -n TestRG
+
+az group create -n TestRG01 -l eastus
+az network vnet create -n TestRG01 -l eastus
+az network vnet create -g TestRG01 -n vnet01 --address-prefixes 10.0.0.0/16 --subnet-name subnet01 --subnet-prefixes 10.0.0.0/24
+az network vnet subnet create -g TestRG01 --vnet-name vnet01 -n subnet02 --address-prefixes 10.0.1.0/24
+az network public-ip create -g TestRG01 -n pIP01
+az network public-ip create -g TestRG01 -n pIP02
+az network nsg create -g TestRG01 -n nsg01
+az network nsg rule create -g TestRG01 -n ruleSSH --protocol tcp --priority 1000 --destination-port-range 22 --access allow --nsg-name nsg01
+az network nsg rule create -g TestRG01 -n ruleHTTP  --protocol tcp --priority 1100 --destination-port-range 80 --access allow --nsg-name nsg01
+az network nic create -g TestRG01 -n nic01 --vnet-name vnet01 --subnet subnet01 --public-ip-address pIP01 --network-security-group nsg01
+az network nic create -g TestRG01 -n nic02 --vnet-name vnet01 --subnet subnet02 --public-ip-address pIP02 --network-security-group nsg01
+az vm availability-set create -g TestRG01 -n avset01
+az vm create -g TestRG01 -n vm01 --availability-set avset01 --nics nic01 --image UbuntuLTS --admin-user squalarm --ssh-key-value ~/.ssh/1114_rsa.pub --size Standard_DS1_v2
+az vm create -g TestRG01 -n vm02 --availability-set avset01 --nics nic02 --image UbuntuLTS --admin-user squalarm --ssh-key-value ~/.ssh/1114_rsa.pub --size Standard_DS1_v2 --no-wait
+ssh -i ~/.ssh/1114_rsa squalarm@40.87.96.206
+sudo apt update
+sudo apt install -y nginx
+sudo nano index.nginx-debian.html   제목 바꾸기
+ssh -i ~/.ssh/1114_rsa squalarm@13.68.252.168
+sudo apt update
+sudo apt install -y nginx
+cd /var/www/html
+sudo nano index.nginx-debian.html
+az network public-ip create -g TestRG01 -n pIP03 --sku Standard
+az network lb create -g TestRG01 -n lb01 --sku standard --public-ip-address pIP03
+
+
+
+
+
+
+
+az network nic create -g TestRg01 -n nic01 --vnet-name vnet01 --subnet subnet01 --network-security-group nsg01 --public-ip-address pIP01
+
+
+
+az vm availability-set create -g TestRG01 -n avset01 --nics nic01 --image UbuntuLTS --admin-user mingyu --ssh-key-value ~/.ssh/1114_rsa.pub --size Standard_DS1_v2
+az vm create -g TestRG01 -n vm01 --availability-set avset01 --nics nic01 --image UbuntuLTS --admin-user mingyu --ssh-key-value ~/.ssh/1114-rsa.pub --size Standard_DS1_v2
+az vm create -g TestRG01 -n vm02 --availability-set avset01 --nics nic02 --image UbuntuLTS --admin-user mingyu --ssh-key-value ~/.ssh/1114-rsa.pub --size Standard_DS1_v2 --no-wait 
+ssh -i ~
+
+known.host 예전 ip 주소 삭제해야 에러가 안뜸
+ 
+sudo apt install -u nginx
+
+ssh -i ~/.ssh/1114_rsa mingyu@168.62.166.80
+
+
+
+az network public-ip create -g TestRG01 -n pIP03 --sku Standard
+az network lb create -g TestRG01 -n lb01 --sku standard --public-ip-address pIP03 --frontend-ip-name frontendIP --backend-pool-name backendPool
+az network lb probe create -g TestRg01 -n probe01 --lb-name lb01 --protocol tcp --port 80
+az network lb rule create -g TestRg01 -n ruleHTTP --protocol tcp --frontend port 80 --backend-port 80 --frontend-ip-name frontendIP --backend-pool-name backendPool --probe-name probe01 --lb-name lb01
+
+
+az network nic update -g TestRG01 -n nic01 --add ipConfigureations[name=ip
+
+az network nic create -g TestRG01 -n nic03 --vnet-name vnet01 --subnet subnet01 --network-security-group nsg01 --lb-name lb01 --lb-address-pools backendPool
+
+az vm nic set --nics nic03 -g Test
+
+az network lb create -g TestRG01 -n nic01 -- add ipConfigurations[name=ipconfig1].loadBalancerBackendAddressPools id=
+
+
+
+
+brew ?          업데이트?
+dotnet --version      버전 확인
+dotnet new console -o NewApp
+cd NewApp/
+ls
+dotnet run
+씨 샾? dotnet는 씨샾의 언어
+
+cd ..
+dotnet new web -o NewWep       -o 폴더를 만듬
+
+cd NewWep
+ls
+dotnet run
+
+
+마지막
+rem -rf NewApp
+
+cd ..
+az group delete -n TestRG01                마지막에 삭제
+
+
+
+
+
+
+
+정리
+az group create -l eastus
+az group show -n TestRG --querylocation
+az vm list-skus -l eastus -o tsv
+az network vnet create -g testRG -n vnet01 --help
+az network vnet create -g testrg -n vnet01 --address-prefixes
+
+
+
+
+
+
+
+az group create -n TestRG01 -l eastus
+az network vnet create -n TestRG01 -l eastus
+az network vnet create -g TestRG01 -n vnet01 --address-prefixes 10.0.0.0/16 --subnet-name subnet01 --subnet-prefixes 10.0.0.0/24
+az network vnet subnet create -g TestRG01 --vnet-name vnet01 -n subnet02 --address-prefixes 10.0.1.0/24
+az network public-ip create -g TestRG01 -n pIP01
+az network public-ip create -g TestRG01 -n pIP02
+az network nsg create -g TestRG01 -n nsg01
+az network nsg rule create -g TestRG01 -n ruleSSH --protocol tcp --priority 1000 --destination-port-range 22 --access allow --nsg-name nsg01
+az network nsg rule create -g TestRG01 -n ruleHTTP  --protocol tcp --priority 1100 --destination-port-range 80 --access allow --nsg-name nsg01
+az network nic create -g TestRG01 -n nic01 --vnet-name vnet01 --subnet subnet01 --public-ip-address pIP01 --network-security-group nsg01
+az network nic create -g TestRG01 -n nic02 --vnet-name vnet01 --subnet subnet02 --public-ip-address pIP02 --network-security-group nsg01
+az vm availability-set create -g TestRG01 -n avset01
+az vm create -g TestRG01 -n vm01 --availability-set avset01 --nics nic01 --image UbuntuLTS --admin-user squalarm --ssh-key-value ~/.ssh/1114_rsa.pub --size Standard_DS1_v2
+az vm create -g TestRG01 -n vm02 --availability-set avset01 --nics nic02 --image UbuntuLTS --admin-user squalarm --ssh-key-value ~/.ssh/1114_rsa.pub --size Standard_DS1_v2 --no-wait
+ssh -i ~/.ssh/1114_rsa squalarm@40.87.96.206
+sudo apt update
+sudo apt install -y nginx
+sudo nano index.nginx-debian.html   제목 바꾸기
+ssh -i ~/.ssh/1114_rsa squalarm@13.68.252.168
+sudo apt update
+sudo apt install -y nginx
+cd /var/www/html
+sudo nano index.nginx-debian.html
+az network public-ip create -g TestRG01 -n pIP03 --sku Standard
+az network lb create -g TestRG01 -n lb01 --sku standard --public-ip-address pIP03 --frontend-ip-name fromtendIP --backend-pool-name backendPool
+az network lb probe create -g TestRG01 -n probe01 --lb-name lb01 --protocol tcp --port 80
+
+
+
+
+
+마지막
+rem -rf NewApp
+
+cd ..
+az group delete -n TestRG01                마지막에 삭제
+
+
+
+
+
+11월 16일
+
+커스텀 비젼
+
+코그니티브 서비스 
+Cognitive Services
+
+TTS 텍스트 서비스 - 텍스트를 음성으로 전환
+https://azure.microsoft.com/ko-kr/services/cognitive-services/text-to-speech/#features
+
+github.com/GlobalAICommunity/Workshop=CustomV
+gitbub globalaicommunity
+custom vision
+
+
+custom vision portal
+
+https://www.customvision.ai/projects/01bf0a84-860c-4959-9a0e-6314d30ef64d#/manage    사진 분석
+postman download 서버가 반응하는지 실험해보는 앱
+
+GET --> POST
+
+https://studio.azureml.net/Home/ViewWorkspaceCached/df16b9b9ab39415d8275768e00978811#Workspace/Experiments/ListExperiments    머신러닝
+
+
+
+
+11월 17일
+Create a virtual machine scale set
+
+
+
+az group create -n TestRG -l eastus
+ssh-keygen -t rsa -b 2048            /Users/       /.ssh/1117_rsa
+~/.ssh/1117_rsa.pub
+ls ~/.ssh/
+az vmss create -g TestRG -n vmss01 --image UbuntuLTS --upgrade-policy-mode automatic --admin-username now --vm-sku standard_ds1_v2 --lb-sku Standard --ssh-key-value ~/.ssh/1117_rsa.pub
+az network nsg rule create -g TestRG --nsg-name vmss01NSG -n ruleHTTP --protocol tcp --direction inbound --destination-port-range 80 --access allow --priority 1100
+
+az vmss scale -g TestRG -n vmss01 --new-capacity 3
+az vmss list-instance-connection-info -g TestRG -n vmss01
+
+ssh -p 50000 -i ~/.ssh/1117_rsa squalarm@20.42.26.128       내 포트 대로
+yes
+sudo apt update
+sudo apt install -y nginx
+exit
+
+ssh -p 50001 -i ~/.ssh/1117_rsa squalarm@20.42.26.128
+yes
+sudo apt update
+sudo apt install -y nginx
+
+ssh -p 50002 -i ~/.ssh/1117_rsa squalarm@20.42.26.128
+yes
+sudo apt update
+sudo apt install -y nginx
+
+cd /var/www/htl
+/var/www/html$ exit
+
+ls
+sudo nano index.nginx-debian.html
+
+az network lb probe create -g TestRG -n probe01 --lb-name vmss01LB --protocol http --path / --port 80
+
+
+
+부하
+az monitor autoscale create -g TestRg --resource vmss01 --resource-type Microsoft.Compute/virtualMachineScaleSets -n autosc --min-count 2 --max-count 5 --count 3
+
+az monitor autoscale rule create -g TestRG --autoscale-name autosc --condition "Precentage CPU > 70 avg 3m" --scale out 1
+
+az monitor autoscale rule create -g TestRG --autoscale-name autosc --condition "Precentage CPU < 30 avg 3m" --scale in 1
+
+ssh -p 50001 -i ~/.ssh/1117_rsa now@40.88.211.51       내 포트 대로
+
+as vmss list-instance-connection-info -g TestRG 0n vmss01
+
+ssh -p 50000 -i ~/.ssh/1117_rsa squalarm@20.42.26.128 
+
+sudo apt install stress
+
+exit
+
+sudo stress --cpu 10 --timeout 300 &         5분 동안 부하
+
+exit
+
+다음 머신
+
+sudo stress --cpu 10 --timeout 300 &
+
+ssh -i ~/.ssh/1117_rsa now@52.149.140.246
+
+sudo apt update
+sudo apt install -y nginx
+
+sudo reboot
+
+cat ~/.ssh/1117_rsa.pub
+결과 복사    우분툴 서버에 붙여넣기
+
+az sig create -g TestRG01 --gallery-name gallery01 
+az vm get-instance-view -g TestRG01 -n vm01 --query id
+"/subscriptions/58c6087b-ca67-4a89-823a-78328302621a/resourceGroups/TestRG01/providers/Microsoft.Compute/virtualMachines/vm01"    결과 복사  --> 이미지 버전 만들 때 사용
+
+az sig image-definition create -g TestRG01 --gallery-name gallery01 --gallery-image-definition imagDef --offer squalarm --sku squalarm --os-type linux --os-state specialized --publisher squalarm
+
+az sig image-version create -g TestRG01 --gallery-name gallery01 --gallery-image-definition imagDef --gallery-image-version 1.0.0 --target-regions "eastus" --replica-count 1 --managed-image "/subscriptions/58c6087b-ca67-4a89-823a-78328302621a/resourceGroups/TestRG01/providers/Microsoft.Compute/virtualMachines/vm01"
+az vm get-instance-view -g TestRG01 -n vm01 --query id
+az sig image-version create -g TestRG01 --gallery-name gallery01 --gallery-image-definition imagDef --gallery-image-version 1.0.0 --target-regions "eastus" --replica-count 1 --managed-image "/subscriptions/58c6087b-ca67-4a89-823a-78328302621a/resourceGroups/TestRG01/providers/Microsoft.Compute/virtualMachines/vm01"
+
+devops 검색해보기
+
+
+git 명령어
+
+mkdir squalarm
+cd squalarm
+dotnet new console -o First project
+
+git add .
+git commit -m "1st commit"
+git config --global user.email "squalarm@naver.com"
+git config --global user.name "squalarm"
+git commit -m "squalarm"
+
+git remote add squalarm https://github.com/squalarm/squalarm
+git push squalarm master
+git add .
+git commit -m "2nd commit"
+git push FirstGitProj master
+az group create -n TestRG02 -l eastus
+az vm create -g TestRG02 -n vm00 --image "/subscriptions/58c6087b-ca67-4a89-823a-78328302621a/resourceGroups/TestRG01/providers/Microsoft.Compute/virtualMachines/vm01  (imageDef 붙여넣기)" --admin-username squalarm --ssh-key-value ~/.ssh/7_rsa.pub --specialized
+
+
+로직앱
+
+storage account
+
+
+
+
+11월 18일
+
+jenkins 설치할 때 자바 사용
+
+
+az group create -n TestRG -l eastus
+
+az network vnet create -n vnet01 -g TestRG --address-prefix 10.0.0.0/16 --subnet-name subnet01 --subnet-prefix 10.0.0.0/24
+
+az network nsg create -g TestRG -n nsg01
+
+az network nsg rule create -g TestRG -n ruleSSH --nsg-name nsg01 --protocol tcp --priority 1000 --destination-port-range 22 --access allow
+
+az network nsg rule create -g TestRG -n ruleHTTP --nsg-name nsg01 --protocol tcp --priority 1100 --destination-port-range 80 --access allow
+
+az network public-ip create -g TestRG -n pIP01
+
+az network nic create -g TestRG -n nic01 --vnet-name vnet01 --subnet subnet01 --public-ip-address pIP01 --network-security-group nsg01
+
+ssh-keygen -t rsa -b 2048    
+/home/squalarm/.ssh/1118_rsa 키젠 생성
+
+ls ~/.ssh/  키생성 확인
+
+az vm create -g TestRG -n vm01 --nics nic01 --admin-username squalarm --ssh-key-value ~/.ssh/1127_rsa.pub --size Standard_DS1_v2 --image UbuntuLTS
+
+ssh -i ~/.ssh/1118_rsa squalarm@40.76.206.217
+
+sudo apt update
+
+sudo apt upgrade
+
+젠킨스 설치
+
+sudo apt install openjdk-8-jre-headless     젠킨스 인스톨
+
+java -version 자바 버전 확인
+
+wget -qO - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+
+sudo bash -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+
+sudo apt update   인스톨 전에도 꼭 해야함
+
+sudo apt install jenkins
+
+sudo apt update     인스톨 후 꼭 해야함
+
+sudo nano /etc/init.d/jenkins
+
+PATH=/usr/lib/jvm/java-8-openjdk-amd64/bin:/usr/bin:/sbin:/usr/sbin      앞쪽에 추가 잘보고 추가할 것
+
+cat /etc/default/jenkins   폴더 확인
+
+sudo systemctl start jenkins    warning은 에러 아님
+
+sudo systemctl status jenkins   상태 확인
+
+포트를 연다
+
+exit
+
+az network nsg rule create -g TestRG -n ruleJenkins --nsg-name nsg01 --protocol tcp --priority 1200 --destination-port-range 8080 --access allow
+
+ssh -i ~/.ssh/1118_rsa squalarm@40.76.206.217
+
+크롬 창 주소 http://40.76.206.217:8080/
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+비밀번호 복사해서 52.170.16.104:8080 에 붙이고 로그인
+Select plugins to install 선택
+블랭크에 github 입력하여 아래에 나오는 github를 체크한 후 Install 그리고 로그인              http://40.76.206.217:8080/
+
+github.com./CodingSta/nodejs-docs-hello-world   교수님의 github 주소
+
+클라우드 창
+git clone https://github.com/CodingSta/nodejs-docs-hello-world
+
+exit
+ls
+cd nodejs-docs-hello-world
+ls    내용확인 index.js
+
+code .
+
+git add .
+
+git commit -m "now"
+
+git remote add nodejs-docs-hello-world https://github.com/squalarm/nodejs-docs-hello-world
+
+git push squalarm master
+
+ssh 접속
+
+sudo apt install nginx
+clear
+sudo apt update
+sudo nano /etc/nginx/sites-available/default
+ location에 있는 try_files 수정  샾 눌러서 주석처리 후 
+아래에 라인 맞춰서 proxy_pass http://127.0.0.1:3000/;
+
+sudo service nginx restart
+
+sudo nano /etc/nginx/sites-available/default
+
+sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+
+sudo apt install -y nodejs 
+
+ls
+cd /var/lib/jenkins/workspace/HelloWorld/
+ls
+
+
+젠킨스
+echo "TEST"
+npm install
+node index.js
+
+클라우드
+exit
+ls
+code .
+
+
+git add .
+git commit -m "3rd commit"
+git push nodejs master 
+
+11월 19일
+
+https://bit.ly/titanicdata_csv     파일 다운로드
+파일 1개당 1.98기가까지 가능
+전체는 10기가 까지 가능
+
+에디트 메타데이타
+
+웹앱
+설치 후
+
+az group create -n TestRG -l eastus
+
+az webapp deployment user set --user-name squalarm --password 73206318now
+
+az webapp deployment user show
+
+az webapp list-runtimes
+
+az appservice plan create -n squalarmWebPlan -g TestRG --sku B1 --is-linux     linux를 안 쓰면 기본적으로 윈도우 서버가 생성됨
+
+az webapp create -g TestRG --plan squalarmWebPlan -n squalarmweb --runtime "DOTNETCORE|3.1" --deployment-local-git
+
+git 설치
+
+윈도우 좌측 하단 검색에   git   입력
+
+git창
+
+dotnet new web -o MyWeb
+git init
+git add .
+git commit -m "1st commit"
+git config --global user.email "squalarm@naver.com"
+git config --global user.name "squalarm"
+git commit -m "squalarm"
+git remote add MyWeb https://squalarm@squalarmweb.scm.azurewebsites.net/squalarmweb.git
+git push MyWeb master
+
+
+
+
+11월28일
+https://bit.ly/titanicdata_csv
+
+
+ssh-keygen -t rsa -b 2048
+
+cat ~/.ssh/1128_rsa.pub
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC20rWjWiW1ZFIOZOYVnSYCGNH6TlvTKogBLPwjoltSuuH3lnBvvP9UFqa3Zb9RjPQOVdvmlthduJDPzcSUEXWiaClT9fEOewNc9dY1NKOAbElTBxoI6aSOX92Q9C0Yd6MEWaYCKWh941k5eN9ev5La8CGDjln+T1+OYuLEr4McTvy9ehWPcIzhMZZn//pxJbuiHsDKkhS/kP9J5h6KAo0A48CzcFlBM+mQlreNyPdXiZbuOtzg9QOun/lJr302kXXD9ggMAtDYS5vHLxTjZ5OBLn9oTTvqJ8bho/tJQgCPRCA9YgdRfQPYkR6hS7xt0zVANksq3ZegrPqQQB2PZLPl squalarm@cc-d9423dcb-c9bd4b499-87dkp
+
+
+sudo apt update
+
+sudo docker ps
+
+sudo docker images
+
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+sudo apt update
+
+
+
+az group create -n Test -l eastus
+
+sudo docker pull node
+
+sudo docker images
+
+http://releases.ubuntu.com/20.10/      우분투
+
+ssh -i~/.ssh/1128_rsa squalarm@13.92.208.185
+
+sudo docker images
+
+
+
+http://github.com/CodingSta/DockerNode
+
+git clone https://github.com/CodingSta/DockerNode
+
+ls
+
+cd DockerNode/
+
+cat Dockerfile 
+
+#서버 파일 복사
+COPY package*.json  ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 80
+
+ENV NODE_ENV=production
+
+CMD ["node", "index.js"]
+
+
+
+cat index.js
+
+nano index.html    수정
+
+cd ..
+
+docker login
+
+
+포스트맨
+
+{"data": [{"pclass": 0, "gender": "example_value", "age": 0.0, "sibsp": 0, "parch": 0, "fare": 0.0, "embarked": "example_value"}]}
+
+sudo apt install gnupg2 pass
+
+sudo docker login
+
+cd DockerNode/
+
+npm install
+
+sudo curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+
+sudo apt-get install -y nodejs
+
+sudo apt update
+
+npm install
+
+cd node_modules
+
+cd ..
+
+cd ..
+
+sudo docker build ./DockerNode -t squalarm-app
+
+sudo docker ps
+
+sudo docker images
+
+sudo docker run -d -p 8080:80 squalarm-app
+
+sudo docker ps   돌아가는 거 확인
+
+sudo docker stop 67f6695582a8e3b216b4373f1eff689e8cb82fccf738142b42144d81669aed55
+
+sudo docker ps -al
+
+sudo docker images
+
+sudo docker rmi 2d840844f8e7   삭제 안됨
+
+sudo docker build ./DockerNode -t squalarm-app
+
+sudo docker rmi squalarm-app -f     강제로 삭제 끝에 -f
+
+ az acr create -n squalarmregi01 -g automlrg --sku standard
+
+sudo az acr login -n squalarmregi
+
+sudo docker images
+
+sudo docker tag squalarm-app squalarmregi.azurecr.io/squalarm-app
+
+sudo docker images
+
+sudo docker images
+
+sudo docker push squalarmregi.azurecr.io/squalarm-app
+
+sudo docker push squalarmregi.azurecr.io/squalarm-app:version1
+
+
+cat index.js
+
+nano index.html 
+
+
+
+http://dev.azure.com/
+
+git clone https://github.com/CodingSta/nodejs-docs-hello-world
+
+nano index.js
+
+git remote add Proj1128 https://squalarm@dev.azure.com/squalarm/proj1128/_git/proj1128
+
+git add .
+
+git commit -m "1st"
+
+git push
+
+git push Proj1128 master
+
+squalarm token      mbfnhiibgfc2kg25mgqy3gwaid3fnggxksblm4ddiq2fogaoz2ea
+
+cd ..
+
+sudo npm install pm2 -g 
+
+sudo apt install unzip
+
+mkdir azagent;cd azagent;curl -fkSL -o vstsagent.tar.gz https://vstsagentpackage.azureedge.net/agent/2.177.1/vsts-agent-linux-x64-2.177.1.tar.gz;tar -zxvf vstsagent.tar.gz; if [ -x "$(command -v systemctl)" ]; then ./config.sh --deploymentgroup --deploymentgroupname "proj1128Group" --acceptteeeula --agent $HOSTNAME --url https://dev.azure.com/squalarm/ --work _work --projectname 'proj1128' --runasservice; sudo ./svc.sh install; sudo ./svc.sh start; else ./config.sh --deploymentgroup --deploymentgroupname "proj1128Group" --acceptteeeula --agent $HOSTNAME --url https://dev.azure.com/squalarm/ --work _work --projectname 'proj1128'; ./run.sh; fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
