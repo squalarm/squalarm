@@ -1,0 +1,49 @@
+git-scm 다운
+https://git-scm.com
+
+git 터미널에서--------------
+git config --global user.name squalarm 
+git config --global user.email squalarm@naver.com
+
+git clone https://github.com/squalarm/squalarm.git
+
+git --> 스테이징 에어리어
+
+working directory      (git add)--> staging area   (git commit)-->local repository   (git push)-->remote repository
+
+(git fetch)-->remote repository   (git merge)------>working directory  
+
+git fetch + git merge = git pull          그냥 바로 가져오는 명령어
+
+k-startup 꼭 확인해 볼 것.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
